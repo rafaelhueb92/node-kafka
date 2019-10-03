@@ -1,6 +1,14 @@
 const express = require("express");
-const { producer, consumer } = require("./kafka");
-
+const { producer, consumer } = require("../../layers/kafka")(
+  "api",
+  ["localhost:9090"],
+  null,
+  {
+    initialRetryTime: 300,
+    retries: 10
+  },
+  "certificate-group-receiver"
+);
 class App {
   constructor() {
     this.express = express();
@@ -8,7 +16,7 @@ class App {
     this.routes();
     this.startKafka();
   }
-  
+
   middlewares() {
     this.express.use(express.json());
     this.express.use((req, res, next) => {

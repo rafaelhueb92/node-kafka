@@ -1,0 +1,2 @@
+To up Kafka use in folder:
+docker-compose up -d

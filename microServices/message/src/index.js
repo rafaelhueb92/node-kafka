@@ -1,4 +1,11 @@
-const { consumer, producer } = require("./kafka");
+const { consumer, producer } = require("../../../layers/kafka")(
+  "message",
+  ["localhost:9090"],
+  null,
+  null,
+  "certificate-group"
+);
+
 const topic = "issue-message";
 
 function run() {
